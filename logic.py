@@ -851,7 +851,7 @@ class WumpusKB(PropKB):
         wumpus_at_least = list()
         for x in range(1, dimrow+1):
             for y in range(1, dimrow + 1):
-                wumps_at_least.append(wumpus(x, y))
+                wumpus_at_least.append(wumpus(x, y))
 
         self.tell(new_disjunction(wumpus_at_least))
 
@@ -896,24 +896,27 @@ class WumpusKB(PropKB):
         flags = [0, 0, 0, 0, 0]
 
         ## Things perceived
-        if isinstance(percept, Glitter):
+
+        ## No such classes defined elsewhere..
+        ## Lets assume the percept is an expr('percept')
+        if percept == Expr('Glitter'):
             flags[0] = 1
             self.tell(percept_glitter(time))
-        elif isinstance(percept, Bump):
+        elif percept == Expr('Bump'):
             flags[1] = 1
             self.tell(percept_bump(time))
-        elif isinstance(percept, Stench):
+        elif percept == Expr('Stench'):
             flags[2] = 1
             self.tell(percept_stench(time))
-        elif isinstance(percept, Breeze):
+        elif percept == Expr('Breeze'):
             flags[3] = 1
             self.tell(percept_breeze(time))
-        elif isinstance(percept, Scream):
+        elif percept == Expr('Scream'):
             flags[4] = 1
             self.tell(percept_scream(time))
 
         ## Things not perceived
-        for i in len(range(flags)):
+        for i in range(len(flags)):
             if flags[i] == 0:
                 if i == 0:
                     self.tell(~percept_glitter(time))

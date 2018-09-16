@@ -343,5 +343,9 @@ def test_SAT_plan():
     assert SAT_plan((0, 0), transition, (1, 1), 4) == ['Right', 'Down']
 
 
+def test_hwa():
+    hwa = HybridWumpusAgent()
+    hwa.execute('Glitter')
+
 if __name__ == '__main__':
     pytest.main()
